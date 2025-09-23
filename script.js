@@ -1,4 +1,4 @@
-// Список тем и файлов — можно автоматизировать позже, пока вручную
+// Список тем и файлов
 const TOPICS = [
     {
         name: "Core Java",
@@ -6,7 +6,6 @@ const TOPICS = [
         files: [
             "jvm.md",
             "equals-vs-operator.md"
-            // добавляй сюда новые файлы
         ]
     },
     {
@@ -26,6 +25,24 @@ const TOPICS = [
     }
 ];
 
+// Переключение темы
+function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.getElementById('theme-toggle').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+}
+
+// Загрузка сохранённой темы
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+}
+
+// Загрузка Markdown-файла
 async function loadMarkdownFile(url) {
     try {
         const response = await fetch(url);
@@ -37,8 +54,8 @@ async function loadMarkdownFile(url) {
     }
 }
 
+// Парсинг Markdown в пары вопрос-ответ
 function parseMarkdownToQAPairs(mdContent) {
-    // Разделяем по заголовкам второго уровня
     const sections = mdContent.split(/^##\s+/m).filter(s => s.trim());
     const qaPairs = [];
 
@@ -54,6 +71,7 @@ function parseMarkdownToQAPairs(mdContent) {
     return qaPairs;
 }
 
+// Рендеринг вопросов и ответов
 function renderQA(container, qaPairs) {
     qaPairs.forEach(({ question, answer }) => {
         const qaBlock = document.createElement('div');
@@ -70,7 +88,7 @@ function renderQA(container, qaPairs) {
 
         const answerDiv = document.createElement('div');
         answerDiv.className = 'answer';
-        answerDiv.innerHTML = marked.parse(answer); // рендерим Markdown в HTML
+        answerDiv.innerHTML = marked.parse(answer);
 
         qaBlock.appendChild(questionDiv);
         qaBlock.appendChild(answerDiv);
@@ -78,6 +96,7 @@ function renderQA(container, qaPairs) {
     });
 }
 
+// Загрузка раздела
 async function loadTopicSection(topic) {
     const sectionDiv = document.createElement('div');
     sectionDiv.className = 'topic-section';
@@ -97,7 +116,11 @@ async function loadTopicSection(topic) {
     return sectionDiv;
 }
 
+// Инициализация
 async function init() {
+    loadSavedTheme();
+    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
     const container = document.getElementById('topics-container');
     for (let topic of TOPICS) {
         const section = await loadTopicSection(topic);
@@ -105,5 +128,4 @@ async function init() {
     }
 }
 
-// Запускаем!
 document.addEventListener('DOMContentLoaded', init);
