@@ -79,7 +79,3 @@
 - HTML/CSS/JS
 - marked.js для рендеринга Markdown
 - GitHub Pages для хостинга
-
-## 💡 Как внести свой опыт?
-
-См. → [CONTRIBUTING.md](./CONTRIBUTING.md)
