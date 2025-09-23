@@ -14,4 +14,4 @@
 
 ## Какие есть интерфейсы коллекций?
 
-![Схема интерфейсов коллекций](/images/collection-interfaces.png)
+![Схема интерфейсов коллекций](images/collection-interfaces.png)
