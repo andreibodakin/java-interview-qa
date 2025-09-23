@@ -3,7 +3,7 @@
 const PRACTICE_CATEGORIES = [
     {
         name: "Массивы",
-        path: "practice-problems/arrays",
+        path: "practice/arrays",
         files: [
             "two-sum.md",
             "move-zeroes.md"
@@ -11,7 +11,7 @@ const PRACTICE_CATEGORIES = [
     },
     {
         name: "Строки",
-        path: "practice-problems/strings",
+        path: "practice/strings",
         files: [
             "reverse-string.md",
             "find-first-unique.md"
@@ -19,14 +19,14 @@ const PRACTICE_CATEGORIES = [
     },
     {
         name: "Коллекции",
-        path: "practice-problems/collections",
+        path: "practice/collections",
         files: [
             "group-anagrams.md"
         ]
     },
     {
         name: "Алгоритмы",
-        path: "practice-problems/algorithms",
+        path: "practice/algorithms",
         files: [
             "fibonacci.md"
         ]
