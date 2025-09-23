@@ -202,3 +202,22 @@ h1 {
     background-color: #2b6cb0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
+
+.footer {
+    margin-top: 60px;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+}
+
+.footer a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
