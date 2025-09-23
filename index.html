@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Java Interview Q&A</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Подготовка к Java-собеседованию</h1>
-        <p>Нажми на вопрос, чтобы увидеть ответ. Все данные загружаются из .md-файлов.</p>
+        <header>
+            <h1>Подготовка к Java-собеседованию</h1>
+            <p>Нажми на вопрос, чтобы увидеть ответ. Все данные загружаются из .md-файлов.</p>
+            <button id="theme-toggle" class="theme-toggle">🌙</button>
+        </header>
 
         <div id="topics-container">
-            <!-- Сюда JS вставит темы и вопросы -->
+            <!-- Сюда подгружаются темы и вопросы -->
         </div>
     </div>
 
-    <!-- Подключаем marked.js для рендеринга Markdown -->
+    <!-- marked.js для рендеринга Markdown -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="script.js"></script>
 </body>
