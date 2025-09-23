@@ -20,7 +20,8 @@ const TOPICS = [
         name: "Collections",
         path: "topics/collections",
         files: [
-            "hashmap-internals.md"
+            "hashmap-internals.md",
+            "arraylist-vs-linkedlist.md"
         ]
     }
 ];
