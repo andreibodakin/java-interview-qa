@@ -2,7 +2,7 @@
 const TOPICS = [
     {
         name: "Core Java",
-        path: "topics/core-java",
+        path: "theory/core-java",
         files: [
             "jvm.md",
             "equals-vs-operator.md"
@@ -10,14 +10,14 @@ const TOPICS = [
     },
     {
         name: "Multithreading",
-        path: "topics/multithreading",
+        path: "theory/multithreading",
         files: [
             "volatile.md"
         ]
     },
     {
         name: "Collections",
-        path: "topics/collections",
+        path: "theory/collections",
         files: [
             "hashmap-internals.md",
             "arraylist-vs-linkedlist.md"
