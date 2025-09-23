@@ -1,3 +1,4 @@
+
 // Структура категорий — легко расширять
 const PRACTICE_CATEGORIES = [
     {
@@ -44,45 +45,80 @@ async function loadMarkdownFile(url) {
     }
 }
 
-// Парсинг Markdown: первая строка ## — заголовок (задача), остальное — решение
-function parseMarkdownToProblem(mdContent) {
-    const sections = mdContent.split(/^##\s+/m).filter(s => s.trim());
-    if (sections.length === 0) return null;
+// Парсинг Markdown: ищем ## Условие и ## Решение
+function parseProblem(mdContent) {
+    // Разделяем по заголовкам второго уровня
+    const sections = mdContent.split(/^##\s+/m).slice(1); // первый элемент — до первого ##
+    
+    let condition = "", solution = "";
 
-    const lines = sections[0].split('\n');
-    const title = lines[0].trim();
-    const solution = lines.slice(1).join('\n').trim();
+    for (let section of sections) {
+        const lines = section.split('\n');
+        const title = lines[0].trim();
+        const content = lines.slice(1).join('\n').trim();
 
-    return { title, solution };
+        if (title === "Условие") {
+            condition = content;
+        } else if (title === "Решение") {
+            solution = content;
+        }
+    }
+
+    return { condition, solution };
 }
 
-// Рендеринг задачи
-function renderProblem(container, problem) {
+// Рендеринг задачи с двойным раскрытием
+function renderProblem(container, problemTitle, condition, solution) {
     const problemBlock = document.createElement('div');
     problemBlock.className = 'qa-block';
 
-    const questionDiv = document.createElement('div');
-    questionDiv.className = 'question';
-    questionDiv.textContent = problem.title;
-    questionDiv.onclick = function() {
-        const answerDiv = this.nextElementSibling;
-        answerDiv.classList.toggle('show');
+    // Уровень 1: Название задачи
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'question';
+    titleDiv.textContent = problemTitle;
+    titleDiv.style.cursor = 'pointer';
+    titleDiv.onclick = function() {
+        const conditionDiv = this.nextElementSibling;
+        conditionDiv.classList.toggle('show');
         this.classList.toggle('open');
     };
 
-    const answerDiv = document.createElement('div');
-    answerDiv.className = 'answer';
-    answerDiv.innerHTML = marked.parse(problem.solution);
+    // Уровень 2: Условие задачи (изначально скрыто)
+    const conditionDiv = document.createElement('div');
+    conditionDiv.className = 'answer';
+    conditionDiv.innerHTML = marked.parse(condition);
 
-    problemBlock.appendChild(questionDiv);
-    problemBlock.appendChild(answerDiv);
+    // Кнопка "Показать решение" внутри условия
+    const showSolutionBtn = document.createElement('button');
+    showSolutionBtn.textContent = "👀 Показать решение";
+    showSolutionBtn.className = 'theme-toggle'; // используем существующий стиль кнопки
+    showSolutionBtn.style.marginTop = '15px';
+    showSolutionBtn.style.width = 'auto';
+    showSolutionBtn.style.padding = '8px 16px';
+
+    const solutionDiv = document.createElement('div');
+    solutionDiv.className = 'answer';
+    solutionDiv.style.display = 'none';
+    solutionDiv.innerHTML = marked.parse(solution);
+
+    showSolutionBtn.onclick = function(e) {
+        e.stopPropagation(); // не закрывать условие при клике
+        solutionDiv.style.display = solutionDiv.style.display === 'none' ? 'block' : 'none';
+        this.textContent = solutionDiv.style.display === 'none' ? "👀 Показать решение" : "🙈 Скрыть решение";
+    };
+
+    conditionDiv.appendChild(showSolutionBtn);
+    conditionDiv.appendChild(solutionDiv);
+
+    problemBlock.appendChild(titleDiv);
+    problemBlock.appendChild(conditionDiv);
     container.appendChild(problemBlock);
 }
 
 // Рендеринг категории
 async function renderCategory(category) {
     const categorySection = document.createElement('div');
-    categorySection.className = 'topic-section'; // используем тот же класс, что и на главной
+    categorySection.className = 'topic-section';
 
     const categoryTitle = document.createElement('h2');
     categoryTitle.className = 'topic-title';
@@ -92,10 +128,9 @@ async function renderCategory(category) {
     for (let file of category.files) {
         const url = `${category.path}/${file}`;
         const mdContent = await loadMarkdownFile(url);
-        const problem = parseMarkdownToProblem(mdContent);
-        if (problem) {
-            renderProblem(categorySection, problem);
-        }
+        const { condition, solution } = parseProblem(mdContent);
+        const problemTitle = file.replace(/\.md$/, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        renderProblem(categorySection, problemTitle, condition, solution);
     }
 
     return categorySection;
