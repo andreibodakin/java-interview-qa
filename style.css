@@ -205,15 +205,19 @@ h1 {
 
 .footer {
     margin-top: 50px;
-    padding: 15px 0;
+    width: 100%;
+}
+
+.footer-inner {
     text-align: center;
 }
 
 .footer a {
+    display: inline-block;
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.9em;
-    padding: 6px 12px;
+    padding: 8px 16px;
     border-radius: 20px;
     background-color: var(--bg-secondary);
     transition: all 0.2s;
@@ -222,5 +226,4 @@ h1 {
 .footer a:hover {
     background-color: var(--accent);
     color: white;
-    text-decoration: none;
 }
