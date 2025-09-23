@@ -160,3 +160,19 @@ h1 {
 .btn:hover {
     background-color: #2980a9;
 }
+
+.answer button {
+    display: block;
+    margin: 15px auto 10px;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.answer button:hover {
+    background-color: #2980a9;
+}
