@@ -14,4 +14,4 @@
 
 ## Какие есть интерфейсы коллекций?
 
-![Интерфейсы коллекций](../images/collection-interfaces.png)
+![Интерфейсы коллекций](https://github.com/andreibodakin/java-interview-qa/tree/main/images/collection-interfaces.png)
