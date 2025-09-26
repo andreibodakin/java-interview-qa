@@ -118,16 +118,6 @@ async function renderCategory(category) {
     return categorySection;
 }
 
-// Инициализация страницы практики
-async function initPractice() {
-    const container = document.getElementById('problems-container');
-    const categories = await loadPracticeManifest();
-    for (let category of categories) {
-        const categorySection = await renderCategory(category);
-        container.appendChild(categorySection);
-    }
-}
-
 // Запускаем после загрузки DOM
 if (document.getElementById('problems-container')) {
     document.addEventListener('DOMContentLoaded', initPractice);
