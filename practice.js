@@ -1,6 +1,6 @@
 // Загрузка манифеста задач
 async function loadPracticeManifest() {
-    const response = await fetch('practice-manifest.json');
+    const response = await fetch('./practice-manifest.json');
     if (!response.ok) throw new Error('Failed to load practice manifest');
     return await response.json();
 }
