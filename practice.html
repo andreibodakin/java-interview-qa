@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практика: Задачи на лайф-кодинг</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Задачи на лайф-кодинг</h1>
+            <p>Реши задачу сам, потом открой решение.</p>
+            <p><a href="index.html" class="btn">📚 Вернуться к теоретическим вопросам.</a></p>
+            <button id="theme-toggle" class="theme-toggle">🌙</button>
+        </header>
+
+        <div id="problems-container">
+            <!-- Сюда подгружаются задачи -->
+        </div>
+    </div>
+
+    <!-- marked.js для рендеринга Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>   <!-- общий JS для темы -->
+    <script src="practice.js"></script> <!-- JS для загрузки задач -->
+<footer class="footer">
+    <div class="footer-inner">
+        <a href="https://github.com/andreibodakin/java-interview-qa" target="_blank" rel="noopener">
+            🖥️ Исходники на GitHub
+        </a>
+    </div>
+</footer>
+</body>
+</html>

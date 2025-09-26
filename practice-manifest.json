@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Массивы",
+    "path": "practice/arrays",
+    "files": [
+      "two-sum.md"
+    ]
+  },
+  {
+    "name": "Коллекции",
+    "path": "practice/collections",
+    "files": [
+      "SimpleBlockingQueue.md"
+    ]
+  },
+  {
+    "name": "Multithreading",
+    "path": "practice/multithreading",
+    "files": [
+      "RateLimiter.md"
+    ]
+  }
+]
