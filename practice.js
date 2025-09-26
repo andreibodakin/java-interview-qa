@@ -1,37 +1,19 @@
 
-// Структура категорий — легко расширять
-const PRACTICE_CATEGORIES = [
-    {
-        name: "Массивы",
-        path: "practice/arrays",
-        files: [
-            "two-sum.md",
-            "move-zeroes.md"
-        ]
-    },
-    {
-        name: "Строки",
-        path: "practice/strings",
-        files: [
-            "reverse-string.md",
-            "find-first-unique.md"
-        ]
-    },
-    {
-        name: "Коллекции",
-        path: "practice/collections",
-        files: [
-            "group-anagrams.md"
-        ]
-    },
-    {
-        name: "Алгоритмы",
-        path: "practice/algorithms",
-        files: [
-            "fibonacci.md"
-        ]
+// Загрузка манифеста задач
+async function loadPracticeManifest() {
+    const response = await fetch('practice-manifest.json');
+    if (!response.ok) throw new Error('Failed to load practice manifest');
+    return await response.json();
+}
+
+async function initPractice() {
+    const container = document.getElementById('problems-container');
+    const categories = await loadPracticeManifest();
+    for (let category of categories) {
+        const categorySection = await renderCategory(category);
+        container.appendChild(categorySection);
     }
-];
+}
 
 // Загрузка Markdown-файла
 async function loadMarkdownFile(url) {
@@ -139,7 +121,8 @@ async function renderCategory(category) {
 // Инициализация страницы практики
 async function initPractice() {
     const container = document.getElementById('problems-container');
-    for (let category of PRACTICE_CATEGORIES) {
+    const categories = await loadPracticeManifest();
+    for (let category of categories) {
         const categorySection = await renderCategory(category);
         container.appendChild(categorySection);
     }
