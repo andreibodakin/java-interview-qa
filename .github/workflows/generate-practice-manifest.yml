@@ -1,10 +1,9 @@
-
 name: Generate practice manifest
 
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: # позволяет запускать вручную
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -24,4 +23,10 @@ jobs:
     - name: Generate practice manifest
       run: |
         node generate-practice-manifest.js
-      
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: ./
