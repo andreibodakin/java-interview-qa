@@ -103,7 +103,7 @@ async function renderCategory(category) {
     return categorySection;
 }
 
-// Инициализация — ТОЛЬКО ОДИН РАЗ
+// Инициализация
 async function initPractice() {
     const container = document.getElementById('problems-container');
     const categories = await loadPracticeManifest();
