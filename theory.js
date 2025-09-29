@@ -61,15 +61,21 @@ async function loadMarkdownFile(url) {
     }
 }
 
-// Парсинг Markdown в пары вопрос-ответ
+// Парсинг Markdown: ищем только заголовки "## Вопрос: ..."
 function parseMarkdownToQAPairs(mdContent) {
-    const sections = mdContent.split(/^##\s+/m).filter(s => s.trim());
     const qaPairs = [];
+    
+    // Разбиваем по "## Вопрос:" с учётом возможных пробелов и двоеточия
+    const blocks = mdContent.split(/(?=^##\s*Вопрос\s*:?\s)/gmi).filter(block => block.trim());
 
-    for (let section of sections) {
-        const lines = section.split('\n');
-        const question = lines[0].trim();
-        const answer = lines.slice(1).join('\n').trim();
+    for (let block of blocks) {
+        // Ищем первую строку, начинающуюся с ## Вопрос
+        const match = block.match(/^##\s*Вопрос\s*:?\s*(.*)/mi);
+        if (!match) continue;
+
+        const question = match[1].trim(); // то, что после "Вопрос:"
+        const answer = block.substring(match[0].length).trim(); // всё остальное — ответ
+
         if (question) {
             qaPairs.push({ question, answer });
         }
