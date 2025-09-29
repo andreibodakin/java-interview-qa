@@ -22,6 +22,13 @@ const TOPICS = [
             "hashmap-internals.md",
             "arraylist-vs-linkedlist.md"
         ]
+    },
+    {
+        name: "Database",
+        path: "theory/database",
+        files: [
+            "NplusOne.md"
+        ]
     }
 ];
 
