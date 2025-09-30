@@ -10,7 +10,8 @@
     "name": "Коллекции",
     "path": "practice/collections",
     "files": [
-      "SimpleBlockingQueue.md"
+      "SimpleBlockingQueue.md",
+      "charsFrequencyInString.md"
     ]
   },
   {
