@@ -1,5 +1,12 @@
 [
   {
+    "name": "Алгоритмы",
+    "path": "practice/algorithms",
+    "files": [
+      "invertTree.md"
+    ]
+  },
+  {
     "name": "Массивы",
     "path": "practice/arrays",
     "files": [
